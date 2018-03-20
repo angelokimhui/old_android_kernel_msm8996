@@ -17,6 +17,7 @@
 
 #include "skeleton64.dtsi"
 #include <dt-bindings/clock/msm-clocks-8996.h>
+#include "../../../../include/generated/autoconf.h"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM 8996";
@@ -63,6 +64,12 @@
 		CPU0: cpu@0 {
 			device_type = "cpu";
 			compatible = "qcom,kryo";
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			clock-frequency = <1804800>;
+#else
+			clock-frequency = <1766400>;
+#endif
+			efficiency = <2048>;
 			reg = <0x0 0x0>;
 			qcom,limits-info = <&mitigation_profile0>;
 			enable-method = "psci";
@@ -85,6 +92,12 @@
 		CPU1: cpu@1 {
 			device_type = "cpu";
 			compatible = "qcom,kryo";
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			clock-frequency = <1804800>;
+#else
+			clock-frequency = <1766400>;
+#endif
+			efficiency = <2048>;
 			reg = <0x0 0x1>;
 			qcom,limits-info = <&mitigation_profile1>;
 			enable-method = "psci";
@@ -102,6 +115,12 @@
 		CPU2: cpu@100 {
 			device_type = "cpu";
 			compatible = "qcom,kryo";
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			clock-frequency = <2323200>;
+#else
+			clock-frequency = <2304000>;
+#endif
+			efficiency = <2048>;
 			reg = <0x0 0x100>;
 			qcom,limits-info = <&mitigation_profile2>;
 			enable-method = "psci";
@@ -124,6 +143,12 @@
 		CPU3: cpu@101 {
 			device_type = "cpu";
 			compatible = "qcom,kryo";
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			clock-frequency = <2323200>;
+#else
+			clock-frequency = <2304000>;
+#endif
+			efficiency = <2048>;
 			reg = <0x0 0x101>;
 			enable-method = "psci";
 			qcom,limits-info = <&mitigation_profile3>;
@@ -534,8 +559,13 @@
 			<  5859 /*  768 MHz */ >,
 			<  7759 /* 1017 MHz */ >,
 			<  9887 /* 1296 MHz */ >,
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			< 12046 /* 1578 MHz */ >,
+			< 14344 /* 1880 MHz */ >;
+#else
 			< 11863 /* 1555 MHz */ >,
 			< 13763 /* 1804 MHz */ >;
+#endif
 	};
 
 	qcom,cpu-bwmon {
@@ -563,8 +593,13 @@
 			<  5859 /*  768 MHz */ >,
 			<  7759 /* 1017 MHz */ >,
 			<  9887 /* 1296 MHz */ >,
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			< 12046 /* 1578 MHz */ >,
+			< 14344 /* 1880 MHz */ >;
+#else
 			< 11863 /* 1555 MHz */ >,
 			< 13763 /* 1804 MHz */ >;
+#endif
 	};
 
 	memlat_cpu0: qcom,memlat-cpu0 {
@@ -581,8 +616,13 @@
 			<  5928 /* 777 MHz */ >,
 			<  7904 /* 1036 MHz */ >,
 			<  9887 /* 1296 MHz */ >,
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			< 12046 /* 1578 MHz */ >,
+			< 14344 /* 1880 MHz */ >;
+#else
 			< 11863 /* 1555 MHz */ >,
 			< 13763 /* 1804 MHz */ >;
+#endif
 	};
 
 	memlat_cpu2: qcom,memlat-cpu2 {
@@ -599,8 +639,13 @@
 			<  5928 /* 777 MHz */ >,
 			<  7904 /* 1036 MHz */ >,
 			<  9887 /* 1296 MHz */ >,
+#ifdef CONFIG_VOID_CRAZY_CPU_OC
+			< 12046 /* 1578 MHz */ >,
+			< 14344 /* 1880 MHz */ >;
+#else
 			< 11863 /* 1555 MHz */ >,
 			< 13763 /* 1804 MHz */ >;
+#endif
 	};
 
 	qcom,arm-memlat-mon-0 {
