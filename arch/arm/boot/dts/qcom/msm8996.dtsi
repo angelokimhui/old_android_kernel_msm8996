@@ -17,7 +17,6 @@
 
 #include "skeleton64.dtsi"
 #include <dt-bindings/clock/msm-clocks-8996.h>
-#include "../../../../include/generated/autoconf.h"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM 8996";

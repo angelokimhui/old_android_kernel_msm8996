@@ -175,8 +175,6 @@
 			qcom,speed-bin = <0>;
 
 			qcom,initial-pwrlevel = <7>;
-
-			qcom,initial-pwrlevel = <6>;
 #ifdef CONFIG_VOID_CRAZY_GPU_OC
 			qcom,gpu-pwrlevel@0 {
 				reg = <0>;
