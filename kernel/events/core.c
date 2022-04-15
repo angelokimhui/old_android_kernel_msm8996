@@ -1052,13 +1052,13 @@ retry:
 	/*
 	 * One of the few rules of preemptible RCU is that one cannot do
 	 * rcu_read_unlock() while holding a scheduler (or nested) lock when
-	 * part of the read side critical section was irqs-enabled -- see
+	 * part of the read side critical section was preemptible -- see
 	 * rcu_read_unlock_special().
 	 *
 	 * Since ctx->lock nests under rq->lock we must ensure the entire read
-	 * side critical section has interrupts disabled.
+	 * side critical section is non-preemptible.
 	 */
-	local_irq_save(*flags);
+	preempt_disable();
 	rcu_read_lock();
 	ctx = rcu_dereference(task->perf_event_ctxp[ctxn]);
 	if (ctx) {
@@ -1072,22 +1072,21 @@ retry:
 		 * if so.  If we locked the right context, then it
 		 * can't get swapped on us any more.
 		 */
-		raw_spin_lock(&ctx->lock);
+		raw_spin_lock_irqsave(&ctx->lock, *flags);
 		if (ctx != rcu_dereference(task->perf_event_ctxp[ctxn])) {
-			raw_spin_unlock(&ctx->lock);
+			raw_spin_unlock_irqrestore(&ctx->lock, *flags);
 			rcu_read_unlock();
-			local_irq_restore(*flags);
+			preempt_enable();
 			goto retry;
 		}
 
 		if (!atomic_inc_not_zero(&ctx->refcount)) {
-			raw_spin_unlock(&ctx->lock);
+			raw_spin_unlock_irqrestore(&ctx->lock, *flags);
 			ctx = NULL;
 		}
 	}
 	rcu_read_unlock();
-	if (!ctx)
-		local_irq_restore(*flags);
+	preempt_enable();
 	return ctx;
 }
 
