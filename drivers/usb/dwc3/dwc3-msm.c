@@ -2865,23 +2865,7 @@ static int dwc3_msm_power_set_property_usb(struct power_supply *psy,
 		}
 #endif
 		break;
-<<<<<<< HEAD
-	case POWER_SUPPLY_PROP_TYPE:
-		if (mdwc->sub_type == POWER_SUPPLY_SUB_TYPE_INVALID &&
-					val->intval == POWER_SUPPLY_TYPE_USB)
-			break;
-		psy->type = val->intval;
 
-		dev_dbg(mdwc->dev,
-			"type=%d, sub_type=%d, state=%d, retrycnt=%d, ing=%d\n",
-				psy->type, mdwc->sub_type, mdwc->chg_state,
-				mdwc->chg_det_cnt, mdwc->chg_det_retrying);
-		if (mdwc->chg_state == USB_CHG_STATE_DETECTED)
-			break;
-
-		mdwc->sub_type = POWER_SUPPLY_SUB_TYPE_UNKNOWN;
-		switch (psy->type) {
-=======
 	case POWER_SUPPLY_PROP_REAL_TYPE:
 		mdwc->usb_supply_type = val->intval;
 		/*
@@ -2898,7 +2882,7 @@ static int dwc3_msm_power_set_property_usb(struct power_supply *psy,
 		else
 			psy->type = mdwc->usb_supply_type;
 		switch (mdwc->usb_supply_type) {
->>>>>>> eas/eas
+
 		case POWER_SUPPLY_TYPE_USB:
 			mdwc->chg_type = DWC3_SDP_CHARGER;
 			mdwc->voltage_max = MICRO_5V;
@@ -3003,15 +2987,11 @@ static enum power_supply_property dwc3_msm_pm_power_props_usb[] = {
 	POWER_SUPPLY_PROP_VOLTAGE_MAX,
 	POWER_SUPPLY_PROP_CURRENT_MAX,
 	POWER_SUPPLY_PROP_INPUT_CURRENT_MAX,
-	POWER_SUPPLY_PROP_TYPE,
 	POWER_SUPPLY_PROP_HEALTH,
 	POWER_SUPPLY_PROP_USB_OTG,
-<<<<<<< HEAD
 	POWER_SUPPLY_PROP_CHARGER_TYPE,
 	POWER_SUPPLY_PROP_SUB_TYPE,
-=======
 	POWER_SUPPLY_PROP_REAL_TYPE,
->>>>>>> eas/eas
 };
 
 static irqreturn_t dwc3_pmic_id_irq(int irq, void *data)
