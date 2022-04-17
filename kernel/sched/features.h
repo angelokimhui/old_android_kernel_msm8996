@@ -3,7 +3,7 @@
  * them to run sooner, but does not allow tons of sleepers to
  * rip the spread apart.
  */
-SCHED_FEAT(GENTLE_FAIR_SLEEPERS, true)
+SCHED_FEAT(GENTLE_FAIR_SLEEPERS, false)
 
 /*
  * Place new tasks ahead so that they do not starve already running
@@ -34,7 +34,7 @@ SCHED_FEAT(CACHE_HOT_BUDDY, true)
 /*
  * Allow wakeup-time preemption of the current task:
  */
-SCHED_FEAT(WAKEUP_PREEMPTION, true)
+SCHED_FEAT(WAKEUP_PREEMPTION, false)
 
 SCHED_FEAT(HRTICK, false)
 SCHED_FEAT(DOUBLE_TICK, false)
@@ -103,14 +103,14 @@ SCHED_FEAT(ENERGY_AWARE, true)
 #else
 SCHED_FEAT(ENERGY_AWARE, false)
 #endif
-
+SCHED_FEAT(STUNE_BOOST_BIAS_BIG, true)
 /*
  * Minimum capacity capping. Keep track of minimum capacity factor when
  * minimum frequency available to a policy is modified.
  * If enabled, this can be used to inform the scheduler about capacity
  * restrictions.
  */
-SCHED_FEAT(MIN_CAPACITY_CAPPING, false)
+SCHED_FEAT(MIN_CAPACITY_CAPPING, true)
 
 /*
  * Enforce the priority of candidates selected by find_best_target()
